@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.0": {
+      "Blazored.SessionStorage/1.0.11": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components": "3.0.0",
+          "Microsoft.AspNetCore.Components.Web": "3.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Blazored.SessionStorage.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Blazored.SessionStorage.dll": {}
+        }
+      },
       "EmbeddedBlazorContent/1.9.0": {
         "type": "package",
         "compile": {
@@ -226,6 +239,18 @@
     }
   },
   "libraries": {
+    "Blazored.SessionStorage/1.0.11": {
+      "sha512": "qy2Erz2TtzHEYKRnnucLLzJA2Lt6myF3hZ5MAMUbLolE4ukKTJx1+OtxMrT70UA9PKtPThxtsGs2G4I11igi1w==",
+      "type": "package",
+      "path": "blazored.sessionstorage/1.0.11",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "blazored.sessionstorage.1.0.11.nupkg.sha512",
+        "blazored.sessionstorage.nuspec",
+        "lib/netstandard2.0/Blazored.SessionStorage.dll"
+      ]
+    },
     "EmbeddedBlazorContent/1.9.0": {
       "sha512": "249XFEoqlXWZ3WFG7d6IoymGfognTHQl94Ppiu9Guf+xHp98BaQeA4pxpkKvS1aR/2mCRPEyO6e08BAP8IhA+w==",
       "type": "package",
@@ -498,6 +523,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
+      "Blazored.SessionStorage >= 1.0.11",
       "CuriousDriveRazorLibrary >= 1.0.0",
       "EmbeddedBlazorContent >= 1.9.0",
       "MatBlazor >= 1.9.0"
@@ -551,6 +577,10 @@
     "frameworks": {
       "netcoreapp3.0": {
         "dependencies": {
+          "Blazored.SessionStorage": {
+            "target": "Package",
+            "version": "[1.0.11, )"
+          },
           "EmbeddedBlazorContent": {
             "target": "Package",
             "version": "[1.9.0, )"
@@ -570,6 +600,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.0.1, 3.0.1]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.0.1, 3.0.1]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[3.0.0, 3.0.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[3.0.0, 3.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -578,7 +626,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

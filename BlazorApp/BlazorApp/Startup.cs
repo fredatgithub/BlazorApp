@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using BlazorApp.Data;
 using EmbeddedBlazorContent;
 using System.Net.Http;
+using Microsoft.AspNetCore.Components.Authorization;
+using Blazored.SessionStorage;
 
 namespace BlazorApp
 {
@@ -30,12 +32,15 @@ namespace BlazorApp
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<WeatherForecastService>();            
 
             services.AddSingleton<IAuthorService, AuthorService>();
             services.AddSingleton<IPublisherService, PublisherService>();
+            services.AddBlazoredSessionStorage();
 
-            services.AddSingleton<HttpClient>();
+            services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
+            services.AddSingleton<HttpClient>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,9 +61,12 @@ namespace BlazorApp
             app.UseStaticFiles();
 
             app.UseEmbeddedBlazorContent(typeof(MatBlazor.BaseMatComponent).Assembly);
-
+        
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub();

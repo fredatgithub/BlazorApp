@@ -94,7 +94,7 @@ using BlazorApp.Data;
 #line hidden
 #nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/publishers")]
-    public class Publishers : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class Publishers : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)

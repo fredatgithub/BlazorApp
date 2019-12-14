@@ -100,7 +100,7 @@ using BlazorApp.Data;
     [Microsoft.AspNetCore.Components.RouteAttribute("/authors/authordetail/{authorId:int}")]
     [Microsoft.AspNetCore.Components.RouteAttribute("/authors/authordetail")]
     [Microsoft.AspNetCore.Components.RouteAttribute("/author")]
-    public class AuthorDetail : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class AuthorDetail : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)

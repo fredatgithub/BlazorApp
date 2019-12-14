@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
-    public class Component1 : Microsoft.AspNetCore.Components.ComponentBase
+    public partial class Component1 : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
