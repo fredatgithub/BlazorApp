@@ -23,9 +23,18 @@
     {
         if (firstRender && Cities == null)
         {
-            Cities = await JSRuntime.InvokeAsync<string[]>("getCities");
+            try
+            {
+                Cities = await JSRuntime.InvokeAsync<string[]>("getCities");
 
-            StateHasChanged();
+                StateHasChanged();
+            }
+            catch (Exception)
+            {
+
+                //throw;
+            }
+            
         }
     }
 }

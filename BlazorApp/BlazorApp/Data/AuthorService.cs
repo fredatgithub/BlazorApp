@@ -11,6 +11,8 @@ namespace BlazorApp.Data
 
         public AuthorService()
         {
+            //throw new Exception("AuthorServiceException");
+            
             Authors = new List<Author>();
 
             Authors.Add(new Author(1, "Johnson", "White","johnson.white@gmail.com",11000,"4084967223", "Menlo Park"));

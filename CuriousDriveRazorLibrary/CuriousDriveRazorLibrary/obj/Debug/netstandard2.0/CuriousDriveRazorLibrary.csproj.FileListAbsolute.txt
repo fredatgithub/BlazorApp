@@ -44,4 +44,3 @@ C:\Data\CuriousDrive\BlazorApp\CuriousDriveRazorLibrary\CuriousDriveRazorLibrary
 C:\Data\CuriousDrive\BlazorApp\CuriousDriveRazorLibrary\CuriousDriveRazorLibrary\obj\Debug\netstandard2.0\CuriousDriveRazorLibrary.RazorTargetAssemblyInfo.cache
 C:\Data\CuriousDrive\BlazorApp\CuriousDriveRazorLibrary\CuriousDriveRazorLibrary\obj\Debug\netstandard2.0\CuriousDriveRazorLibrary.dll
 C:\Data\CuriousDrive\BlazorApp\CuriousDriveRazorLibrary\CuriousDriveRazorLibrary\obj\Debug\netstandard2.0\CuriousDriveRazorLibrary.pdb
-C:\Data\CuriousDrive\BlazorApp\CuriousDriveRazorLibrary\CuriousDriveRazorLibrary\obj\Debug\netstandard2.0\CuriousDriveRazorLibrary.csprojAssemblyReference.cache

@@ -14,6 +14,7 @@ namespace BlazorApp.Data
 
         public CustomAuthenticationStateProvider(ISessionStorageService sessionStorageService)
         {
+            throw new Exception("CustomAuthenticationStateProviderException");
             _sessionStorageService = sessionStorageService;
         }
         
