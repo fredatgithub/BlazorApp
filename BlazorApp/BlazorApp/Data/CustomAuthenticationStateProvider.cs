@@ -14,7 +14,7 @@ namespace BlazorApp.Data
 
         public CustomAuthenticationStateProvider(ISessionStorageService sessionStorageService)
         {
-            throw new Exception("CustomAuthenticationStateProviderException");
+            //throw new Exception("CustomAuthenticationStateProviderException");
             _sessionStorageService = sessionStorageService;
         }
         
@@ -55,7 +55,8 @@ namespace BlazorApp.Data
         public void MarkUserAsLoggedOut()
         {
             _sessionStorageService.RemoveItemAsync("emailAddress");
-            
+            _sessionStorageService.RemoveItemAsync("token");
+
             var identity = new ClaimsIdentity();
 
             var user = new ClaimsPrincipal(identity);

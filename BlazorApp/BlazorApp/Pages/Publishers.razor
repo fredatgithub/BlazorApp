@@ -41,8 +41,27 @@
 <div class="col-6">
 
     <h3><b>Publishers</b></h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>PublisherId</th>
+                <th>Publisher Name</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var publisher in publisherList)
+            {
+                <tr>
+                    <td>@publisher.Pub_Id</td>
+                    <td>@publisher.Publisher_Name</td>
+                    <td>@publisher.City</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-    <MatTable Items="@publisherList" Striped="true" AllowSelection="true" RowClass="tester" class="mat-elevation-z5">
+    @*<MatTable Items="@publisherList" Striped="true" AllowSelection="true" RowClass="tester" class="mat-elevation-z5">
         <MatTableHeader>
             <th class="col-2">PublisherId</th>
             <th class="col-6">Publisher Name</th>
@@ -53,7 +72,7 @@
             <td>@context.Publisher_Name</td>
             <td>@context.City</td>
         </MatTableRow>
-    </MatTable>
+    </MatTable>*@
 </div>
 
 @code {
@@ -73,7 +92,6 @@
         if (firstRender && Cities == null)
         {
             Cities = await JSRuntime.InvokeAsync<string[]>("getCities");
-
             StateHasChanged();
         }
     }

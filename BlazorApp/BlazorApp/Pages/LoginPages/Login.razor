@@ -1,9 +1,10 @@
 ﻿@page  "/"
 @using BlazorApp.Data
+@using Newtonsoft.Json
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
-
+@inject HttpClient Http
 
 <EditForm Model="@user" OnValidSubmit="@ValidateUser">
     <div>
@@ -28,13 +29,17 @@
         <input type="submit" class="form-control col-6 btn btn-primary" value="Login" />
         <a href="/signup" class="col-3">Sign up</a>
     </div>
+    <br />
+    <div class="col-12 row" style="text-align:left; font-weight:bold">
+        <span class="col-12">@LoginMesssage</span>
+    </div>
 
 </EditForm>
-
 
 @code {
 
     private User user;
+    public string LoginMesssage { get; set; }
 
     protected override Task OnInitializedAsync()
     {
@@ -45,12 +50,38 @@
     private async Task<bool> ValidateUser()
     {
         //assume that user is valid
-        //call an API
+        //call an API   
 
-        ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user.EmailAddress);
-        NavigationManager.NavigateTo("/index");
+        string serializedUser = JsonConvert.SerializeObject(user);
 
-        await sessionStorage.SetItemAsync("emailAddress", user.EmailAddress);
+        HttpRequestMessage httpRequestMessage = new HttpRequestMessage();
+
+        httpRequestMessage.Method = new HttpMethod("POST");
+        httpRequestMessage.RequestUri = new Uri("https://localhost:44394/api/Users/Login");
+        httpRequestMessage.Content = new StringContent(serializedUser);
+
+        httpRequestMessage.Content.Headers.ContentType
+            = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+
+        var response = await Http.SendAsync(httpRequestMessage);
+
+        var responseStatusCode = response.StatusCode;
+        var responseBody = await response.Content.ReadAsStringAsync();
+
+        if (responseStatusCode.ToString() == "OK")
+        {
+            var returnedUser = JsonConvert.DeserializeObject<User>(responseBody);
+
+            await sessionStorage.SetItemAsync("emailAddress", user.EmailAddress);
+            await sessionStorage.SetItemAsync("token", user.Token);
+
+            ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user.EmailAddress);
+            NavigationManager.NavigateTo("/index");
+        }
+        else
+        {
+            LoginMesssage = "Invalid username or password";
+        }
 
         return await Task.FromResult(true);
     }
