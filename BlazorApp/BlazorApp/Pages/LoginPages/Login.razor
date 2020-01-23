@@ -1,10 +1,11 @@
 ﻿@page  "/"
 @using BlazorApp.Data
 @using Newtonsoft.Json
+@using BlazorApp.Services
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject Blazored.SessionStorage.ISessionStorageService sessionStorage
-@inject HttpClient Http
+@inject IUserService userService
 
 <EditForm Model="@user" OnValidSubmit="@ValidateUser">
     <div>
@@ -50,30 +51,14 @@
     private async Task<bool> ValidateUser()
     {
         //assume that user is valid
-        //call an API   
+        //call an API
 
-        string serializedUser = JsonConvert.SerializeObject(user);
-
-        HttpRequestMessage httpRequestMessage = new HttpRequestMessage();
-
-        httpRequestMessage.Method = new HttpMethod("POST");
-        httpRequestMessage.RequestUri = new Uri("https://localhost:44394/api/Users/Login");
-        httpRequestMessage.Content = new StringContent(serializedUser);
-
-        httpRequestMessage.Content.Headers.ContentType
-            = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
-        var response = await Http.SendAsync(httpRequestMessage);
-
-        var responseStatusCode = response.StatusCode;
-        var responseBody = await response.Content.ReadAsStringAsync();
-
-        if (responseStatusCode.ToString() == "OK")
+        var returnedUser = await userService.LoginAsync(user);
+        
+        if(returnedUser.EmailAddress != null)
         {
-            var returnedUser = JsonConvert.DeserializeObject<User>(responseBody);
-
-            await sessionStorage.SetItemAsync("emailAddress", user.EmailAddress);
-            await sessionStorage.SetItemAsync("token", user.Token);
+            await sessionStorage.SetItemAsync("emailAddress", returnedUser.EmailAddress);
+            await sessionStorage.SetItemAsync("token", returnedUser.Token);
 
             ((CustomAuthenticationStateProvider)AuthenticationStateProvider).MarkUserAsAuthenticated(user.EmailAddress);
             NavigationManager.NavigateTo("/index");

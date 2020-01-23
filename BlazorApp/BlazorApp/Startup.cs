@@ -14,6 +14,7 @@ using EmbeddedBlazorContent;
 using System.Net.Http;
 using Microsoft.AspNetCore.Components.Authorization;
 using Blazored.SessionStorage;
+using BlazorApp.Services;
 
 namespace BlazorApp
 {
@@ -40,6 +41,12 @@ namespace BlazorApp
 
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
+            services.AddHttpClient<IUserService, UserService>(x => 
+            {
+                x.BaseAddress = new Uri("https://localhost:44394/api/Users/");
+                x.DefaultRequestHeaders.Add("User-Agent", "BlazorServer");
+            });
+            
             services.AddSingleton<HttpClient>();
         }
 
